@@ -1,16 +1,19 @@
 module.exports = (sequelize, Sequelize) => {
-    const Comment = sequelize.define("comments", {
+    const Poi = sequelize.define("pois", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
       },
-      content: {
+      name: {
         type: Sequelize.STRING
       },
-      note : {
-        type: Sequelize.INTEGER
+      posX: {
+          type: Sequelize.FLOAT
+      },
+      posY: {
+          type: Sequelize.FLOAT
       }
     });
   
-    return Comment;
+    return Poi;
   };

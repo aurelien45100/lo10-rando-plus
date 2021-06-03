@@ -1,16 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
-    const Comment = sequelize.define("comments", {
+    const Circuit = sequelize.define("circuits", {
       id: {
         type: Sequelize.INTEGER,
         primaryKey: true
       },
-      content: {
+      name: {
         type: Sequelize.STRING
-      },
-      note : {
-        type: Sequelize.INTEGER
       }
     });
   
-    return Comment;
+    return Circuit;
   };
