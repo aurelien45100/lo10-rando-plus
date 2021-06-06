@@ -12,6 +12,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
+import SearchPoi from "./components/SearchPoi.component";
 
 class App extends Component {
   constructor(props) {
@@ -64,6 +65,12 @@ class App extends Component {
                 </Link>
               </li>
             )}
+
+              <li className="nav-item">
+                <Link to={"/poi"} className="nav-link">
+                  Rechercher un POI
+                </Link>
+              </li>
 
             {showAdminBoard && (
               <li className="nav-item">
@@ -121,6 +128,7 @@ class App extends Component {
             <Route path="/user" component={BoardUser} />
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
+            <Route path="/poi" component={SearchPoi} />
           </Switch>
         </div>
       </div>
