@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SearchBar from './SearchBar.component';
 import POIList from './POIList.component';
+import MapWithMarker from './MapWithMarker.component';
 
 const SearchPoi = (props) => {
   const [input, setInput] = useState('');
@@ -25,6 +26,7 @@ const SearchPoi = (props) => {
 
   useEffect( () => {fetchData()},[]);
 	
+
   return (
     <>
       <h1>Liste des POI</h1>
@@ -33,6 +35,7 @@ const SearchPoi = (props) => {
        onChange={updateInput}
       />
       <POIList poiList={poiList}/>
+      <MapWithMarker markers = {poiList}/>
     </>
    );
 }
