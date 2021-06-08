@@ -3,16 +3,18 @@ import React from 'react';
 const POIList = ({poiList=[]}) => {
   return (
     <>
+    <ul>
     { poiList.map((data,index) => {
         if (data) {
           return (
             <div key={data.name}>
-              <h1>{data.name}</h1>
+              <li>{data.name}</li>
 	    </div>	
     	   )	
     	 }
     	 return null
     }) }
+    </ul>
     </>
   );
 }
