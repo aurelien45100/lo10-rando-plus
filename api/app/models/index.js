@@ -30,6 +30,10 @@ db.comment = require("../models/comment.model.js")(sequelize, Sequelize);
 db.circuit = require("../models/circuit.model.js")(sequelize, Sequelize);
 db.poi = require("../models/poi.model.js")(sequelize, Sequelize);
 
+const PoiCircuit = sequelize.define("poi_circuits", {
+  order: Sequelize.INTEGER
+});
+
 // association n , n user / role
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -58,12 +62,12 @@ db.comment.belongsTo(db.poi)
 
 // association n , n poi / circuit
 db.poi.belongsToMany(db.circuit, {
-  through: "poi_circuit",
+  through: "poi_circuits",
   foreignKey: "poiId",
   otherKey: "circuitId"
 });
 db.circuit.belongsToMany(db.poi, {
-  through: "poi_circuit",
+  through: "poi_circuits",
   foreignKey: "circuitId",
   otherKey: "poiId"
 });
