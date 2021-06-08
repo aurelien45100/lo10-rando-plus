@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 import UserService from "../services/user.service";
 
@@ -37,6 +38,11 @@ export default class BoardUser extends Component {
         <header className="jumbotron">
           <h3>{this.state.content}</h3>
         </header>
+        <div>
+          <button type="button">
+                <Link to={"/create-poi"} className="nav-link">Créer un point d'intérêt</Link>
+          </button>
+        </div>
       </div>
     );
   }

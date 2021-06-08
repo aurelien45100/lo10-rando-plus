@@ -18,5 +18,8 @@ module.exports = function(app) {
 
   app.get("/api/poi/delete/:poiId"/*,[authJwt.verifyToken]*/, controller.deletePoi
   );
+  
+  app.post("/api/poi/add", controller.addPoi
+  );
 
 };
