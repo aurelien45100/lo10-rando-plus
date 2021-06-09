@@ -42,7 +42,7 @@ exports.deletePoi = (req, res) => {
 }
 
 exports.addPoi = (req, res) => {
-  console.log('Nom : ' + req.body.name);
+  console.log('Nom : ' + req.body.name + " posX "+ req.body.posX+ " posY "+req.body.posY +" userId "+req.body.userId);
   Poi.create({name: req.body.name, posX: req.body.posX, posY: req.body.posY, userId: req.body.userId});
   return res.send("POI créé");
 }
