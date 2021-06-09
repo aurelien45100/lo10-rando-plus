@@ -11,7 +11,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `600px`, width:`1000px` }} />,
     mapElement: <div style={{ height: `100%` }} />,
   }),
   withScriptjs,
@@ -54,10 +54,12 @@ export default class CreatePOI extends Component {
 
         <form action='http://localhost:8080/api/poi/add' method="post">
           <label for="name">Titre</label>
-          <input type="text" id="name" name="name" />
-          <input type="hidden" name="userId" value={userId} />
-          <input type="text" id="posX" name="posX" value={posX} />
-          <input type="text" id="posY" name="posY" value={posY} />
+          <input type="text" id="name" name="name" required />
+          <input type="hidden" name="userId" value={userId} disabled />
+          <label for="posX">Latitude</label>
+          <input type="text" id="posX" name="posX" value={posX} disabled />
+          <label for="posY">Longitude</label>
+          <input type="text" id="posY" name="posY" value={posY} disabled />
           <button type="submit">Valider</button>
         </form>
 
