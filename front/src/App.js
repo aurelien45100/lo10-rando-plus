@@ -14,6 +14,7 @@ import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import SearchPoi from "./components/SearchPoi.component";
 import CreatePOI from "./components/create-poi.component";
+import CircuitInfos from "./components/CircuitInfos.component";
 
 class App extends Component {
   constructor(props) {
@@ -131,6 +132,7 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/poi" component={SearchPoi} />
+            <Route path="/circuit-infos" component={CircuitInfos} />
           </Switch>
         </div>
       </div>
