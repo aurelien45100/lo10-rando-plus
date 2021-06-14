@@ -38,11 +38,11 @@ exports.deletePoi = (req, res) => {
     }
   });
 
-  return res.send("Supprimé !");
+  return res.redirect("http://localhost:8081/profile");
 }
 
 exports.addPoi = (req, res) => {
   console.log('Nom : ' + req.body.name + " posX "+ req.body.posX+ " posY "+req.body.posY +" userId "+req.body.userId);
   Poi.create({name: req.body.name, posX: req.body.posX, posY: req.body.posY, userId: req.body.userId});
-  return res.send("POI créé");
+  return res.redirect("http://localhost:8081/profile");
 }
