@@ -30,7 +30,7 @@ const ListCircuits = (props) => {
           <ul>
           {
             circuitList && circuitList.map(e => {
-              return <li>{e.name}</li>
+              return <li>{e.name} - <Link to={"/circuit-infos/" + e.id}>Plus d'infos</Link></li>
             })
           }
           </ul>

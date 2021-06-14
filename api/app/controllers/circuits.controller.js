@@ -13,6 +13,24 @@ exports.getCircuit = (req, res) => {
 });
 }
 
+exports.getCircuitById = (req, res) => {
+  let target = req.params.id;
+
+  if(target === undefined){
+    return res.send("Paramètre incorrect");
+  }
+
+  Circuits.findAll({
+    where: {
+      id: {
+        [Op.eq]: target
+      }
+    }
+  }).then(listCircuits => {
+      return res.send(JSON.stringify(listCircuits));
+});
+}
+
 exports.getCircuitsName = (req, res) => {
   Circuits.findAll({attributes: ['name']}).then(circuit => {
           return res.send(JSON.stringify(circuit));
@@ -22,9 +40,13 @@ exports.getCircuitsName = (req, res) => {
 
 exports.addCircuit = async (req, res) => {
   const poiList = JSON.parse(req.body.poiList);
-  
+  console.log(req.body);
+  console.log('11111111111111111111111111111111111111111111');
   // Create the circuit 
-  let createdCircuit = await Circuits.create({name: req.body.name, userId: req.body.userId});
+  let createdCircuit = await Circuits.create({name: req.body.name, userId: req.body.userId}).catch(
+    console.log('Catché')
+  );
+  console.log('2222222222222222222222222222222222222222222222222');
   
   // Link the poi to that circuit
   poiList.map((poi, index) => { // Start the order from 1 and not 0

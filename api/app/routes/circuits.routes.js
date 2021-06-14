@@ -13,6 +13,9 @@ module.exports = function(app) {
   app.get("/api/circuits/search", controller.getCircuit
   );
 
+  app.get("/api/circuits/getCircuitById/:id"/*,[authJwt.verifyToken]*/, controller.getCircuitById
+  );
+
   app.get("/api/circuits/name", controller.getCircuitsName
   );
 
