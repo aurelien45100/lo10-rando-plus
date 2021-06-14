@@ -18,6 +18,7 @@ import SearchPoi from "./components/SearchPoi.component";
 import CreateCircuits from "./components/CreateCircuits.component";
 import CreatePOI from "./components/create-poi.component";
 import CircuitInfos from "./components/CircuitInfos.component";
+import ListCircuits from "./components/ListCircuits.component";
 
 class App extends Component {
   constructor(props) {
@@ -84,7 +85,11 @@ class App extends Component {
               <Link to={"/circuits"} className="dropdown-item">
                   Créer un Circuits
                 </Link>
+                <Link to={"/circuits-list"} className="dropdown-item">
+                  Liste des Circuits
+                </Link>
               </div>
+
             </li>
             {showAdminBoard && (
               <li className="nav-item">
@@ -146,6 +151,7 @@ class App extends Component {
             <Route path="/poi" component={SearchPoi} />
             <Route path="/circuits" component={CreateCircuits} />
             <Route path="/circuit-infos" component={CircuitInfos} />
+            <Route path="/circuits-list" component={ListCircuits} />
           </Switch>
         </div>
       </div>
