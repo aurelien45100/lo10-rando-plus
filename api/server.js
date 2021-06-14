@@ -38,11 +38,8 @@ app.get("/", (req, res) => {
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
 require('./app/routes/poi.routes')(app);
-<<<<<<< HEAD
 require('./app/routes/circuits.routes')(app);
-=======
 require('./app/routes/comment.routes')(app);
->>>>>>> bb974801b9d0a526f41d97b48d173a133fb5d4e2
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;

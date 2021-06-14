@@ -144,11 +144,8 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/poi" component={SearchPoi} />
-<<<<<<< HEAD
             <Route path="/circuits" component={CreateCircuits} />
-=======
             <Route path="/circuit-infos" component={CircuitInfos} />
->>>>>>> bb974801b9d0a526f41d97b48d173a133fb5d4e2
           </Switch>
         </div>
       </div>
