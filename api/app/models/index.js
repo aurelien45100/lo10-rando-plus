@@ -56,7 +56,7 @@ db.poi.belongsTo(db.user)
 db.circuit.belongsTo(db.user)
 
 // Association 1,n Commentaire / circuit
-db.comment.belongsTo(db.poi)
+db.comment.belongsTo(db.circuit)
 
 // Association 1,N Commentaire / POI
 
