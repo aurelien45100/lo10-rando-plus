@@ -13,6 +13,9 @@ module.exports = function(app) {
   app.get("/api/poi/search", controller.getPoi
   );
 
+  app.get("/api/poi/coord", controller.getCoord
+  );
+
   app.get("/api/poi/getPersonalPoi/:userId"/*,[authJwt.verifyToken]*/,controller.getPersonalPoi
   );
 

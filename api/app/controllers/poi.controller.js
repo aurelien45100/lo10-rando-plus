@@ -11,6 +11,13 @@ exports.getPoi = (req, res) => {
   });
 }
 
+exports.getCoord = (req, res) => {
+  Poi.findAll({attributes: ['posX','posY']}).then(listPoi => {
+      return res.send(JSON.stringify(listPoi));
+});
+}
+
+
 exports.getPersonalPoi = (req, res) => {
   let target = req.params.userId;
 

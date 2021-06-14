@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import 'jquery/dist/jquery.min.js'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/js/bootstrap.min.js'
 import "./App.css";
 
 import AuthService from "./services/auth.service";
@@ -13,6 +15,7 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import SearchPoi from "./components/SearchPoi.component";
+import CreateCircuits from "./components/CreateCircuits.component";
 import CreatePOI from "./components/create-poi.component";
 
 class App extends Component {
@@ -72,7 +75,16 @@ class App extends Component {
                   Rechercher un POI
                 </Link>
               </li>
-
+              <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Circuits
+              </a>
+              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <Link to={"/circuits"} className="dropdown-item">
+                  Créer un Circuits
+                </Link>
+              </div>
+            </li>
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
@@ -131,6 +143,7 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/poi" component={SearchPoi} />
+            <Route path="/circuits" component={CreateCircuits} />
           </Switch>
         </div>
       </div>

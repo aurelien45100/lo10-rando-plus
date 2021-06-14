@@ -34,6 +34,8 @@ const PoiCircuit = sequelize.define("poi_circuits", {
   order: Sequelize.INTEGER
 });
 
+db.poi_circuits = PoiCircuit;
+
 // association n , n user / role
 db.role.belongsToMany(db.user, {
   through: "user_roles",
