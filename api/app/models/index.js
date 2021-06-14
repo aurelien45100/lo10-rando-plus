@@ -57,10 +57,10 @@ db.poi.belongsTo(db.user)
 // Asociation 1,n circuit / user
 db.circuit.belongsTo(db.user)
 
-// Association 1,n Commentaire / circuit
-db.comment.belongsTo(db.poi)
+// Association 1,n Commentaire / circuit, test
+db.comment.belongsTo(db.circuit)
 
-// Association 1,N Commentaire / POI
+// Association 1,N Commentaire / POI, on rajoute pas pour le moment
 
 // association n , n poi / circuit
 db.poi.belongsToMany(db.circuit, {

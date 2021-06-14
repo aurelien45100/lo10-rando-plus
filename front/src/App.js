@@ -17,6 +17,7 @@ import BoardAdmin from "./components/board-admin.component";
 import SearchPoi from "./components/SearchPoi.component";
 import CreateCircuits from "./components/CreateCircuits.component";
 import CreatePOI from "./components/create-poi.component";
+import CircuitInfos from "./components/CircuitInfos.component";
 
 class App extends Component {
   constructor(props) {
@@ -58,14 +59,14 @@ class App extends Component {
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
-                Home
+                Accueil
               </Link>
             </li>
 
             {showModeratorBoard && (
               <li className="nav-item">
                 <Link to={"/mod"} className="nav-link">
-                  Moderator Board
+                  Partie modération
                 </Link>
               </li>
             )}
@@ -88,7 +89,7 @@ class App extends Component {
             {showAdminBoard && (
               <li className="nav-item">
                 <Link to={"/admin"} className="nav-link">
-                  Admin Board
+                  Partie administration
                 </Link>
               </li>
             )}
@@ -96,7 +97,7 @@ class App extends Component {
             {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
-                  User
+                  Partie utilisateur
                 </Link>
               </li>
             )}
@@ -111,7 +112,7 @@ class App extends Component {
               </li>
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
-                  LogOut
+                  Se déconnecter
                 </a>
               </li>
             </div>
@@ -119,13 +120,13 @@ class App extends Component {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login
+                  Se connecter
                 </Link>
               </li>
 
               <li className="nav-item">
                 <Link to={"/register"} className="nav-link">
-                  Sign Up
+                  S'inscrire
                 </Link>
               </li>
             </div>
@@ -143,7 +144,11 @@ class App extends Component {
             <Route path="/mod" component={BoardModerator} />
             <Route path="/admin" component={BoardAdmin} />
             <Route path="/poi" component={SearchPoi} />
+<<<<<<< HEAD
             <Route path="/circuits" component={CreateCircuits} />
+=======
+            <Route path="/circuit-infos" component={CircuitInfos} />
+>>>>>>> bb974801b9d0a526f41d97b48d173a133fb5d4e2
           </Switch>
         </div>
       </div>

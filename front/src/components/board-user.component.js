@@ -42,6 +42,9 @@ export default class BoardUser extends Component {
           <button type="button">
                 <Link to={"/create-poi"} className="nav-link">Créer un point d'intérêt</Link>
           </button>
+          <button type="button">
+                <Link to={"/circuit-infos"} className="nav-link">Circuit info</Link>
+          </button>
         </div>
       </div>
     );
