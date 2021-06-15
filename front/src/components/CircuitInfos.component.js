@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MapWithMarker from "./MapWithMarker.component";
 import CommentList from "./CommentList.component";
 import AuthService from "../services/auth.service";
+import HubEauComponent from "./hubEau.component"
 
 export default class CircuitInfos extends Component {
 
@@ -15,7 +16,9 @@ export default class CircuitInfos extends Component {
             meteo : [],
             circuit: [],
             comments: [],
-            circuitId: 1
+            circuitId: 1,
+            username: "",
+            userId: 1
         };
     }
 
@@ -26,7 +29,7 @@ export default class CircuitInfos extends Component {
 
         // TODO Remplacer les coordonnées par le 1er point du circuit
         this.getMeteo('48.299839077133996', '4.073149400678995');
-        
+
         this.getComment(this.state.circuitId);
     }
 
@@ -37,8 +40,10 @@ export default class CircuitInfos extends Component {
             .then(data => {
                 this.setState({
                     circuitReady: true,
-                    circuit: data
+                    circuit: data,
+                    userId: data[0].userId
                 })
+                this.getName(this.state.userId)
                 console.log('test: ' + data[0].name);
             });
     }
@@ -54,6 +59,16 @@ export default class CircuitInfos extends Component {
             });
     }
 
+    async getName(userId){
+        return await fetch('http://localhost:8080/api/circuits/getUserById/'+userId)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    username: data[0].username
+                })
+            });
+    }
+
     async getComment(circuitId) {
         return await fetch('http://localhost:8080/api/comment/get/' + circuitId)
             .then(response => response.json())
@@ -64,8 +79,9 @@ export default class CircuitInfos extends Component {
                 })
             });
     }
-  
+
   render() {
+      
     const userId = AuthService.getCurrentUser().id;
     console.log("this.state.meteo : ",this.state.meteo)
     return (
@@ -74,7 +90,7 @@ export default class CircuitInfos extends Component {
             <div>
                 <header className="jumbotron">
                     <h3>{this.state.circuit[0].name}</h3>
-                    <p>Créé par : {this.state.circuit[0].userId} (nom de l'utilisateur)</p>
+                    <p>Créé par : {this.state.username} (nom de l'utilisateur)</p>
                 </header>
                 <p>Distance : (distance) | Durée : (durée)</p>
                 {(this.state.meteoReady) ?
@@ -86,6 +102,7 @@ export default class CircuitInfos extends Component {
                     </ul>
                 </div> : null
                 }
+                <HubEauComponent/>
                 <MapWithMarker markers = {this.state.circuit}/>
                 {(this.state.commentsReady) ?
                     <div>

@@ -24,4 +24,6 @@ module.exports = function(app) {
   app.get("/api/circuits/top/:number", controller.getTopCircuits);
 
 
+  app.get("/api/circuits/getUserById/:id", controller.getUsername
+  );
 };
