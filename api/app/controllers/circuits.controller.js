@@ -4,6 +4,7 @@ const PoiCircuit = db.poi_circuits;
 const Circuits = db.circuit;
 const User = db.user;
 const Poi = db.poi;
+const Comment = db.comment;
 
 const Op = db.Sequelize.Op;
 
@@ -11,6 +12,22 @@ exports.getCircuit = (req, res) => {
   Circuits.findAll().then(circuit => {
           return res.send(JSON.stringify(circuit));
 });
+}
+
+exports.getTopCircuits = async (req, res) => {
+  let target = req.params.number;
+
+  if(target === undefined){
+    return res.send("Paramètre incorrect");
+  } else {
+    let isNumber = !isNaN(target) && !isNaN(parseFloat(target))
+    if (!isNumber) {
+      return res.send("Le paramètre n'est pas un numéro")
+    } else {
+      const [results, metadata] = await db.sequelize.query(`SELECT AVG(note) as moyenneNote, circuitId, randoplusDB.circuits.name FROM randoplusDB.comments join randoplusDB.circuits where randoplusDB.circuits.id = randoplusDB.comments.circuitId GROUP BY circuitId Order by moyenneNote DESC limit ${target};`);
+      res.send(JSON.stringify(results))  
+    }
+  }
 }
 
 exports.getCircuitById = (req, res) => {
