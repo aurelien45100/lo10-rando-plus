@@ -7,6 +7,12 @@ module.exports = (sequelize, Sequelize) => {
       },
       name: {
         type: Sequelize.STRING
+      },
+      duration: {
+        type: Sequelize.FLOAT
+      },
+      distance: {
+        type: Sequelize.FLOAT
       }
     });
   

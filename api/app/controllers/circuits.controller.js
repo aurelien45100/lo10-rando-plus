@@ -5,6 +5,7 @@ const Circuits = db.circuit;
 const User = db.user;
 const Poi = db.poi;
 const Comment = db.comment;
+const axios = require("axios");
 
 const Op = db.Sequelize.Op;
 
@@ -58,17 +59,43 @@ exports.getCircuitsName = (req, res) => {
 exports.addCircuit = async (req, res) => {
   const poiList = JSON.parse(req.body.poiList);
   console.log(req.body);
-  console.log('11111111111111111111111111111111111111111111');
-  // Create the circuit 
-  let createdCircuit = await Circuits.create({name: req.body.name, userId: req.body.userId}).catch(
-    console.log('Catché')
-  );
-  console.log('2222222222222222222222222222222222222222222222222');
+
+  // encoded password
+  let encoded = Buffer.from('lo10:LO10password').toString('base64');
+  let auth = 'Basic ' + encoded;
+
+  let origin = poiList[0].posY + ',' + poiList[0].posX;
+  let destination = poiList[poiList.length - 1].posY + ',' + poiList[poiList.length - 1].posX;
+  var uri = 'http://wxs.ign.fr/yc4b0898y7xcd0szthskjtal/itineraire/rest/route.json?origin=' + origin + '&destination=' + destination;
+  if (poiList.length > 2) {
+    uri += '&waypoints=';
+    for (var i = 1; i < poiList.length - 1; i++) {
+      uri += poiList[i].posY + ',' + poiList[i].posX + ';';
+    }
+  }
+  uri += '&method=DISTANCE&graphName=Pieton';
+
+  console.log('URI IGN ' + uri);
+
+  axios.get(uri, {
+    headers: {
+      Authorization: auth
+    }
+  }).then(response => {
+    const myJson = response.data;
+    var duration = parseFloat(myJson.durationSeconds) / 60;
+    var distance = parseFloat(myJson.distanceMeters);
+    // Create the circuit 
+    let createdCircuit = Circuits.create({name: req.body.name, userId: req.body.userId, duration: duration, distance: distance});
+    // Link the poi to that circuit
+    poiList.map((poi, index) => { // Start the order from 1 and not 0
+      PoiCircuit.create({order: index + 1, poiId: poi.id, circuitId: createdCircuit.dataValues.id})
+    })
+    console.log('COUCOU');
+  }).catch(error => {
+    console.log(error);
+  });
   
-  // Link the poi to that circuit
-  poiList.map((poi, index) => { // Start the order from 1 and not 0
-    PoiCircuit.create({order: index + 1, poiId: poi.id, circuitId: createdCircuit.dataValues.id})
-  })
   return res.send("Circuit créé");
 }
 
