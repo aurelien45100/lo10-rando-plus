@@ -16,7 +16,9 @@ export default class CircuitInfos extends Component {
             meteo : [],
             circuit: [],
             comments: [],
-            circuitId: 1
+            circuitId: 1,
+            username: "",
+            userId: 1
         };
     }
 
@@ -38,8 +40,10 @@ export default class CircuitInfos extends Component {
             .then(data => {
                 this.setState({
                     circuitReady: true,
-                    circuit: data
+                    circuit: data,
+                    userId: data[0].userId
                 })
+                this.getName(this.state.userId)
                 console.log('test: ' + data[0].name);
             });
     }
@@ -51,6 +55,16 @@ export default class CircuitInfos extends Component {
                 this.setState({
                     meteoReady: true,
                     meteo: data
+                })
+            });
+    }
+
+    async getName(userId){
+        return await fetch('http://localhost:8080/api/circuits/getUserById/'+userId)
+            .then(response => response.json())
+            .then(data => {
+                this.setState({
+                    username: data[0].username
                 })
             });
     }
@@ -67,6 +81,7 @@ export default class CircuitInfos extends Component {
     }
 
   render() {
+      
     const userId = AuthService.getCurrentUser().id;
     console.log("this.state.meteo : ",this.state.meteo)
     return (
@@ -75,7 +90,7 @@ export default class CircuitInfos extends Component {
             <div>
                 <header className="jumbotron">
                     <h3>{this.state.circuit[0].name}</h3>
-                    <p>Créé par : {this.state.circuit[0].userId} (nom de l'utilisateur)</p>
+                    <p>Créé par : {this.state.username} (nom de l'utilisateur)</p>
                 </header>
                 <p>Distance : (distance) | Durée : (durée)</p>
                 {(this.state.meteoReady) ?

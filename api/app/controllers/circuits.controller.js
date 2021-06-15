@@ -55,6 +55,24 @@ exports.addCircuit = async (req, res) => {
   return res.send("Circuit créé");
 }
 
+exports.getUsername = (req, res) => {
+  let target = req.params.id;
+
+  if(target === undefined){
+    return res.send("Paramètre incorrect");
+  }
+
+  User.findAll({
+    where: {
+      id: {
+        [Op.eq]: target
+      }
+    }
+  }).then(user => {
+      return res.send(JSON.stringify(user));
+});
+}
+
 /* exports.getPersonalPoi = (req, res) => {
   let target = req.params.userId;
 
