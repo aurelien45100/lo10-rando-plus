@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MapWithMarker from "./MapWithMarker.component";
 import CommentList from "./CommentList.component";
 import AuthService from "../services/auth.service";
+import HubEauComponent from "./hubEau.component"
 
 export default class CircuitInfos extends Component {
 
