@@ -26,7 +26,7 @@ export default class CircuitInfos extends Component {
 
         // TODO Remplacer les coordonnées par le 1er point du circuit
         this.getMeteo('48.299839077133996', '4.073149400678995');
-        
+
         this.getComment(this.state.circuitId);
     }
 
@@ -64,7 +64,7 @@ export default class CircuitInfos extends Component {
                 })
             });
     }
-  
+
   render() {
     const userId = AuthService.getCurrentUser().id;
     console.log("this.state.meteo : ",this.state.meteo)
@@ -86,6 +86,7 @@ export default class CircuitInfos extends Component {
                     </ul>
                 </div> : null
                 }
+                <HubEauComponent/>
                 <MapWithMarker markers = {this.state.circuit}/>
                 {(this.state.commentsReady) ?
                     <div>
