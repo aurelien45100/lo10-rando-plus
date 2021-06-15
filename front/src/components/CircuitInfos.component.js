@@ -67,6 +67,7 @@ export default class CircuitInfos extends Component {
   
   render() {
     const userId = AuthService.getCurrentUser().id;
+    console.log("this.state.meteo : ",this.state.meteo)
     return (
         <div className="container">
             {(this.state.circuitReady) ?
@@ -78,7 +79,7 @@ export default class CircuitInfos extends Component {
                 <p>Distance : (distance) | Durée : (durée)</p>
                 {(this.state.meteoReady) ?
                     <div>
-                    <p>Météo : {this.state.meteo.weather.description}</p>
+                    <p>Météo : {this.state.meteo.weather[0].description}</p>
                     <ul>
                         <li>Temperature : {this.state.meteo.main.temp} °C</li>
                         <li>Humidité : {this.state.meteo.main.humidity} %</li>
