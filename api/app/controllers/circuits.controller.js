@@ -16,7 +16,7 @@ exports.getCircuit = (req, res) => {
 }
 
 exports.getTopCircuits = async (req, res) => {
-  let target = req.params.number;
+  let target = req.query.number;
 
   if(target === undefined){
     return res.send("Paramètre incorrect");
@@ -117,13 +117,43 @@ exports.getUsername = (req, res) => {
 });
 }
 
+exports.compareCircuits = async (req,res) => {
+    //let lat = req.query.lat;
+    //let lng = req.query.lng;
+    //let radius = req.query.radius;
+    let distance = req.query.distance;
+    let duration = req.query.duration;
+    let isDistanceValid = !isNaN(distance) && !isNaN(parseFloat(distance))
+    let isDurationValid = !isNaN(duration) && !isNaN(parseFloat(duration))
+
+    //RECUPERATION DE TOUS LES CIRCUITS AVEC LES COORDS DE LEUR POINT DE DEPART
+    let circuitsList = await Circuits.findAll().then(circuits => {
+    
+    if(isDistanceValid){
+        circuits = circuits.filter(circuit => circuit.distance <= distance)
+    }
+    if(isDurationValid){
+        circuits = circuits.filter(circuit => circuit.duration <= duration)
+    }
+        
+
+    return res.send(JSON.stringify(circuits));
+    })
+    //console.log(circuitsList);
+
+    // SI LAT, LNG ET RADIUS SONT DEFINIS, ALORS
+    //DISTANCE DU POINT INITIAL AVEC GEOLIB
+
+    // SI DISTANCE EST DEFINI, ALORS
+    // TRI SUR LA DISTANCE DE CIRCUIT
+
+}
+
 /* exports.getPersonalPoi = (req, res) => {
   let target = req.params.userId;
-
   if(target === undefined){
     return res.send("Paramètre incorrect");
   }
-
   Poi.findAll({
     where: {
       userId: {
@@ -134,16 +164,13 @@ exports.getUsername = (req, res) => {
       return res.send(JSON.stringify(listPoi));
 });
 }
-
 exports.deletePoi = (req, res) => {
   let target = req.params.poiId;
-
   Poi.destroy({
     where: {
       id: target
     }
   });
-
   return res.send("Supprimé !");
 } */
 

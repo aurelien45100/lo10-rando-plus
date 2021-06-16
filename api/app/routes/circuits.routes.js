@@ -21,9 +21,11 @@ module.exports = function(app) {
 
   app.post("/api/circuits/add", controller.addCircuit);
 
-  app.get("/api/circuits/top/:number", controller.getTopCircuits);
+  app.get("/api/circuits/top", controller.getTopCircuits);
 
 
   app.get("/api/circuits/getUserById/:id", controller.getUsername
   );
+
+  app.get("/api/circuits/compare",controller.compareCircuits)
 };

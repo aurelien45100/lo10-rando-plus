@@ -19,5 +19,5 @@ exports.getComments = (req, res) => {
 exports.addComment = (req, res) => {
     console.log('Contenu : ' + req.body.content + " note "+ req.body.note+ " userId "+req.body.userId +" commentId "+req.body.circuitId);
     Comment.create({content: req.body.content, note: req.body.note, userId: req.body.userId, circuitId: req.body.circuitId});
-    return res.send("Commentaire créé");
+    return res.redirect("http://localhost:8081");
 }
