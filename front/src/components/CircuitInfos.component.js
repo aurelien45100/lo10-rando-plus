@@ -90,9 +90,9 @@ export default class CircuitInfos extends Component {
             <div>
                 <header className="jumbotron">
                     <h3>{this.state.circuit[0].name}</h3>
-                    <p>Créé par : {this.state.username} (nom de l'utilisateur)</p>
+                    <p>Créé par : {this.state.username}</p>
                 </header>
-                <p>Distance : (distance) | Durée : (durée)</p>
+                <p>Distance : {Math.round(this.state.circuit[0].distance) / 100} km | Durée : {Math.round(this.state.circuit[0].duration)} min</p>
                 {(this.state.meteoReady) ?
                     <div>
                     <p>Météo : {this.state.meteo.weather[0].description}</p>
